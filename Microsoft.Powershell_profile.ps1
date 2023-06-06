@@ -20,8 +20,12 @@ function cr  { cd \ } #change to rootdir
 # PS Drives
 
 #'git' Drive for GitHub
-$gitDrivePath = "C:\Users\"+[Environment]::UserName+"\Documents\GitHub"
-$t = New-PSDrive -Name git -PSProvider FileSystem -Root C:\Users\ahlhelmn\Documents\GitHub
+try {
+	$gitDrivePath = "C:\Users\"+[Environment]::UserName+"\Documents\GitHub"
+	$t = New-PSDrive -Name git -PSProvider FileSystem -Root C:\Users\ahlhelmn\Documents\GitHub
+} catch {
+	Write-Host "[Custom profile] [ERROR] git PSDrive failed"
+}
 
 
 
@@ -38,7 +42,7 @@ function Edit-Profile
     }
     else
     {
-        np++ "C:\Users\ahlhelmn\Documents\WindowsPowerShell\Microsoft.Powershell_profile.ps1"
+        np++ $PROFILE
     }
 }
 
